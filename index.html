@@ -1,0 +1,160 @@
+# valentine
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff4d6d, #ff85a1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 40px;
+      border-radius: 25px;
+      max-width: 500px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 20px;
+    }
+
+    #text {
+      font-size: 1.2em;
+      line-height: 1.6;
+      min-height: 120px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .yes {
+      background: white;
+      color: #ff4d6d;
+    }
+
+    .no {
+      background: #ff2e63;
+      color: white;
+      position: absolute;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.7);
+      font-size: 20px;
+      animation: float 6s infinite ease-in;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey ❤️</h1>
+    <div id="text"></div>
+
+    <div class="buttons">
+      <button class="yes" onclick="yesClick()">Yes 💖</button>
+      <button class="no" onmouseover="moveNo()">No 🙃</button>
+    </div>
+  </div>
+
+  <script>
+    const message = [
+      "From the moment you came into my life...",
+      "Everything started to feel brighter 🌸",
+      "You became my safe place.",
+      "My best friend.",
+      "My favorite person ❤️",
+      "",
+      "So I have one important question for you..."
+    ];
+
+    let i = 0;
+    let j = 0;
+    const speed = 50;
+    const textDiv = document.getElementById("text");
+
+    function type() {
+      if (i < message.length) {
+        if (j < message[i].length) {
+          textDiv.innerHTML += message[i].charAt(j);
+          j++;
+          setTimeout(type, speed);
+        } else {
+          textDiv.innerHTML += "<br>";
+          j = 0;
+          i++;
+          setTimeout(type, 500);
+        }
+      }
+    }
+
+    type();
+
+    function yesClick() {
+      document.body.innerHTML = `
+        <div class="card">
+          <h1>YAYYYY 😍💘</h1>
+          <p style="font-size:1.4em;">
+            You just made me the happiest person ever ❤️<br><br>
+            Happy Valentine’s Day 🌹
+          </p>
+        </div>
+      `;
+    }
+
+    function moveNo() {
+      const no = document.querySelector(".no");
+      no.style.left = Math.random() * (window.innerWidth - 100) + "px";
+      no.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    }
+
+    // Floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  </script>
+
+</body>
+</html>
